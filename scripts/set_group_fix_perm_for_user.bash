@@ -1,4 +1,15 @@
 #!/bin/bash
+# Author: Vishal Koparde
+# 2021
+# This "wrapper" script is intended to be added as a cronjob on a per user basis
+# It will crawl through all user owned files and folders listed below and make the appropriate group/permission fixes
+#
+#| Folder                 | Fixes                                                        | Log Location                         |
+#| ---------------------- | ------------------------------------------------------------ | ------------------------------------ |
+#| `/data/CCBR`           | set group to CCBR, grant group read/write                    | `/data/CCBR/cronjobs/logs`           |
+#| `/data/CCBR_Pipeliner` | set group to CCBR_Pipeliner, grant group read/write, grant all users read | `/data/CCBR_Pipeliner/cronjobs/logs` |
+#
+
 d=$(date +"%m%d%y")
 
 # /data/CCBR

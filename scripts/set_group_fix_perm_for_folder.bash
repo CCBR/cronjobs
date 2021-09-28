@@ -1,4 +1,14 @@
 #!/bin/bash
+# Author: Vishal Koparde
+# 2021
+# This script take 2 arguments
+# 1. folder to apply the script on
+# 2. group to set the group to
+# The script crawls through the give folder (argument1) and
+# a. changes the "group" of all files and folders to the user provided group (argument2) recursively
+# b. grants the "group" read+write permission to all files and folders, recursively
+# c. if the "group" is CCBR_Pipeliner, then also grants all users read permissions, recursively
+#
 
 function usage(){
 echo "Usage bash $0 <absolute/path/to/folder> <group_name>"
