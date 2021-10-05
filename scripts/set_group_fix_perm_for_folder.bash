@@ -26,6 +26,11 @@ folder="${folder%/}/"
 group=$2
 groups=$(groups)
 
+
+# source whats needed
+if [ -f ~/.bashrc ]; then source ~/.bashrc ;fi
+if [ -f ~/.bash_profile ]; then source ~/.bash_profile ;fi
+
 echo "user: $USER"
 echo "defaultgroup: $(echo $groups|awk '{print $1}')"
 echo "groups: $groups"
@@ -49,13 +54,13 @@ if [ "$ingroup" != "N" ];then
 		-user $USER \
 		-not \( -group $group -and -perm -g+rwX,a+rX  \) \
         	-execdir /usr/bin/chgrp $group {} + \
-        	-execdir /usr/bin/chmod g\+rwX,a\+rX {} +
+        	-execdir /usr/bin/chmod g\+rwX,a\+rX,\+t {} +
 	else 
 		find $folder \( -type d -or -type f \) \
 		-user $USER \
 		-not \( -group $group -and -perm -g+rwX \) \
         	-execdir /usr/bin/chgrp  $group {} + \
-        	-execdir /usr/bin/chmod g\+rwX {} +
+        	-execdir /usr/bin/chmod g\+rwX,\+t {} +
 	fi
 else
 	echo "user: $USER is not a member of group: $group"
