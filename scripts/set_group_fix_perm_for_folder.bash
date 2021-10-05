@@ -35,9 +35,25 @@ echo "user: $USER"
 echo "defaultgroup: $(echo $groups|awk '{print $1}')"
 echo "groups: $groups"
 echo "umask: $(umask)"
+echo "mkdir: $(type mkdir)"
 echo "folder2fix: $folder"
 echo "group2set: $group"
 echo "starttime: $(date +%m%d%y%H%M%S)"
+
+if [ -f ~/.bashrc ];then
+	echo "#####################################################"
+	echo ".bashrc"
+	echo "#####################################################"
+	cat ~/.bashrc
+	echo "#####################################################"
+fi
+if [ -f ~/.bash_profile ];then
+	echo "#####################################################"
+	echo ".bash_profile"
+	echo "#####################################################"
+	cat ~/.bash_profile
+	echo "#####################################################"
+fi
 
 ingroup="N"
 for g in $groups
