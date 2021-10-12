@@ -13,12 +13,17 @@
 d=$(date +"%m%d%y")
 
 # /data/CCBR
-log="/data/CCBR/cronjobs/logs/${USER}.${d}.log"
-bash /data/CCBR_Pipeliner/cronjobs/scripts/set_group_fix_perm_for_folder.bash /data/CCBR/ CCBR >> $log 2>>$log
-gzip -f -n $log
+ingroup="N";for i in $(groups);do if [ "$i" == "CCBR" ];then ingroup="Y"; break;fi;done
+if [ "$ingroup" == "Y" ];then
+    log="/data/CCBR/cronjobs/logs/${USER}.${d}.log"
+    bash /data/CCBR_Pipeliner/cronjobs/scripts/set_group_fix_perm_for_folder.bash /data/CCBR/ CCBR >> $log 2>>$log
+    gzip -f -n $log
+fi
 
-# /data/CCBR
-log="/data/CCBR_Pipeliner/cronjobs/logs/${USER}.${d}.log"
-bash /data/CCBR_Pipeliner/cronjobs/scripts/set_group_fix_perm_for_folder.bash /data/CCBR_Pipeliner/ CCBR_Pipeliner >> $log 2>>$log
-gzip -f -n $log
-
+# /data/CCBR_Pipeliner
+ingroup="N";for i in $(groups);do if [ "$i" == "CCBR_Pipeliner" ];then ingroup="Y"; break;fi;done
+if [ "$ingroup" == "Y" ];then
+    log="/data/CCBR_Pipeliner/cronjobs/logs/${USER}.${d}.log"
+    bash /data/CCBR_Pipeliner/cronjobs/scripts/set_group_fix_perm_for_folder.bash /data/CCBR_Pipeliner/ CCBR_Pipeliner >> $log 2>>$log
+    gzip -f -n $log
+fi
